@@ -55,3 +55,5 @@ streamlit.write('The user entered ', add_my_fruit)
 
 streamlit.dataframe(fruits_to_show)
 
+my_cur.execute("insert into fruit_load_list values ('from streamlit')");
+
