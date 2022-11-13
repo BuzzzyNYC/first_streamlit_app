@@ -48,8 +48,8 @@ streamlit.header("The fruit load list contains:")
 #streamlit.text(my_data_rows)
 streamlit.dataframe(my_data_rows)
 
-fruit_choice = streamlit.text_input('What fruit would you like to add?','Jackfruit')
-streamlit.write('The user entered ', fruit_choice)
+add_my_fruit = streamlit.text_input('What fruit would you like to add?','Jackfruit')
+streamlit.write('The user entered ', add_my_fruit)
 
 # After pulling the data into a pandas dataframe called my_fruit_list, we will ask the streamlit library to display it on the page by typing:
 
