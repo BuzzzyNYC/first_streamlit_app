@@ -43,9 +43,10 @@ import snowflake.connector
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * from fruit_load_list")
-my_data_row = my_cur.fetchone()
-streamlit.text("The fruit load list contains:")
+my_data_rows = my_cur.fetchall()
+streamlit.header("The fruit load list contains:")
 streamlit.text(my_data_row)
+streamlit.dataframe(my_data_rows)
 
 # After pulling the data into a pandas dataframe called my_fruit_list, we will ask the streamlit library to display it on the page by typing:
 
