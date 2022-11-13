@@ -52,8 +52,6 @@ except URLError as e:
 
 # streamlit.text(fruityvice_response.json()) #writes the data to the screen
 
-streamlit.stop()
-
 streamlit.header("The fruit load list contains:")
 # Snowflake-related functions
 def get_fruit_load_list():
@@ -68,12 +66,25 @@ if streamlit.button('Get fruit load list'):
     #streamlit.text(my_data_rows)
     streamlit.dataframe(my_data_rows)
 
-add_my_fruit = streamlit.text_input('What fruit would you like to add?','Jackfruit')
+# Allow the end user to add a fruit to the list
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+        return "Thanks for adding" + new_fruit
+
+add_my_fruit = streamlit.text_input('What fruit would you like to add?')
+
+if streamlit.button('Add a fruit to the list'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    back_from_function = insert_row_snowflake(add_my_fruit)
+    streamlit.text(back_from_function)
+    
 streamlit.write('The user entered ', add_my_fruit)
 
 # After pulling the data into a pandas dataframe called my_fruit_list, we will ask the streamlit library to display it on the page by typing:
 
 streamlit.dataframe(fruits_to_show)
 
-my_cur.execute("insert into fruit_load_list values ('from streamlit')");
+
+streamlit.stop()
 
